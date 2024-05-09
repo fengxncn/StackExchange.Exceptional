@@ -1,10 +1,10 @@
-﻿using StackExchange.Exceptional.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Web;
+using Microsoft.AspNetCore.Http;
+using StackExchange.Exceptional.Internal;
 
 namespace StackExchange.Exceptional
 {

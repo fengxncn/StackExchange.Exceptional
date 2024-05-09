@@ -1,7 +1,7 @@
-﻿using StackExchange.Exceptional.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+using StackExchange.Exceptional.Internal;
 
 namespace StackExchange.Exceptional
 {

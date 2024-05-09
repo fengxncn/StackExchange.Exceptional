@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
     <OutputType>Library</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <xUnitVersion>2.4.1</xUnitVersion>
-    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   
   <ItemGroup>

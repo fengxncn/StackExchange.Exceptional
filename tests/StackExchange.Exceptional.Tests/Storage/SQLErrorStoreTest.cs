@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using Dapper;
+using Microsoft.Data.SqlClient;
 using StackExchange.Exceptional.Internal;
 using StackExchange.Exceptional.Stores;
 using Xunit;
@@ -23,7 +23,7 @@ namespace StackExchange.Exceptional.Tests.Storage
             }
         }
 
-        protected override ErrorStore GetStore([CallerMemberName]string appName = null) =>
+        protected override ErrorStore GetStore([CallerMemberName] string appName = null) =>
             new SQLErrorStore(new ErrorStoreSettings
             {
                 ConnectionString = ConnectionString,
@@ -37,10 +37,10 @@ namespace StackExchange.Exceptional.Tests.Storage
             const string appName = "TestNameBlarghy";
             var store = new SQLErrorStore("Server=.;Trusted_Connection=True;", appName);
 
-            Assert.Equal(store.ApplicationName, appName);
+            Assert.Equal(appName, store.ApplicationName);
             Statics.Settings = new TestSettings(store);
 
-            Assert.Equal(Statics.Settings.DefaultStore.ApplicationName, appName);
+            Assert.Equal(appName, Statics.Settings.DefaultStore.ApplicationName);
         }
     }
 

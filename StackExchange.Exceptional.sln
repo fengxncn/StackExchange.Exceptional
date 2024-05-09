@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.161
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "global", "global", "{9D33C076-4A0C-4366-89B8-9A735E6867EA}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,12 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "global", "global", "{9D33C0
 		Readme.md = Readme.md
 		version.json = version.json
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.MVC5", "samples\Samples.MVC5\Samples.MVC5.csproj", "{D66CF910-FD29-429D-9B51-40864E7C8E56}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackExchange.Exceptional", "src\StackExchange.Exceptional\StackExchange.Exceptional.csproj", "{DA84A7A0-8042-4B2B-A000-3579DD419D2A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Console", "samples\Samples.Console\Samples.Console.csproj", "{61566A7A-8384-4D8D-A55D-B8647B0DDF7C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackExchange.Exceptional.MySQL", "src\StackExchange.Exceptional.MySQL\StackExchange.Exceptional.MySQL.csproj", "{52031553-68D4-4B56-B5ED-867975972038}"
 EndProject
@@ -56,7 +50,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackExchange.Exceptional.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackExchange.Exceptional.MongoDB", "src\StackExchange.Exceptional.MongoDB\StackExchange.Exceptional.MongoDB.csproj", "{8CFA59A5-5180-4466-A32E-507F3D541163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.ConsoleNetCore", "samples\Samples.ConsoleNetCore\Samples.ConsoleNetCore.csproj", "{6CE269E1-6DC9-43A4-B6B8-683CE8A19E6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.ConsoleNetCore", "samples\Samples.ConsoleNetCore\Samples.ConsoleNetCore.csproj", "{6CE269E1-6DC9-43A4-B6B8-683CE8A19E6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,18 +58,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D66CF910-FD29-429D-9B51-40864E7C8E56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D66CF910-FD29-429D-9B51-40864E7C8E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D66CF910-FD29-429D-9B51-40864E7C8E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D66CF910-FD29-429D-9B51-40864E7C8E56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA84A7A0-8042-4B2B-A000-3579DD419D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA84A7A0-8042-4B2B-A000-3579DD419D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA84A7A0-8042-4B2B-A000-3579DD419D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA84A7A0-8042-4B2B-A000-3579DD419D2A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61566A7A-8384-4D8D-A55D-B8647B0DDF7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61566A7A-8384-4D8D-A55D-B8647B0DDF7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61566A7A-8384-4D8D-A55D-B8647B0DDF7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61566A7A-8384-4D8D-A55D-B8647B0DDF7C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52031553-68D4-4B56-B5ED-867975972038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52031553-68D4-4B56-B5ED-867975972038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52031553-68D4-4B56-B5ED-867975972038}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -117,9 +99,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D66CF910-FD29-429D-9B51-40864E7C8E56} = {001E5AA4-42C8-4AC3-B14A-AF1DFA02E9FB}
-		{DA84A7A0-8042-4B2B-A000-3579DD419D2A} = {8B91532F-A112-4F73-80BD-A95B7359BBC3}
-		{61566A7A-8384-4D8D-A55D-B8647B0DDF7C} = {001E5AA4-42C8-4AC3-B14A-AF1DFA02E9FB}
 		{52031553-68D4-4B56-B5ED-867975972038} = {8B91532F-A112-4F73-80BD-A95B7359BBC3}
 		{D316FA70-8563-4360-A60F-1A43F3FA30E5} = {8B91532F-A112-4F73-80BD-A95B7359BBC3}
 		{78B3A2EE-DED6-45D7-BCE7-BF4B6FE03DF4} = {8B91532F-A112-4F73-80BD-A95B7359BBC3}

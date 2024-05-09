@@ -2,21 +2,22 @@
   <PropertyGroup>
     <AssemblyName>StackExchange.Exceptional.Shared</AssemblyName>
     <Description>You shouldn't reference this - Exceptional's shared library for all frameworks</Description>
-    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
     <RootNamespace>StackExchange.Exceptional</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <Reference Include="System.Transactions" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Error.*.cs" DependentUpon="Error.cs" />
     <Compile Update="ExceptionalUtils.*.cs" DependentUpon="ExceptionalUtils.cs" />
     <EmbeddedResource Include="Resources\Bundle.min.js" DependentUpon="Bundle.js" />
     <EmbeddedResource Include="Resources\Bundle.min.css" DependentUpon="Bundle.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
 </Project>
