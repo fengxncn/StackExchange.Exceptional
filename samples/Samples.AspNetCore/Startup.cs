@@ -6,50 +6,43 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Exceptional;
 
-namespace Samples.AspNetCore
+namespace Samples.AspNetCore;
+
+public class Startup(IConfiguration configuration, IWebHostEnvironment env)
 {
-    public class Startup
+    public IConfiguration Configuration { get; } = configuration;
+    public IWebHostEnvironment HostingEnvironment { get; } = env;
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        services.AddMvc();
+        // Make IOptions<ExceptionalSettings> available for injection everywhere
+        services.AddExceptional(Configuration.GetSection("Exceptional"), settings =>
         {
-            Configuration = configuration;
-            HostingEnvironment = env;
-        }
+            //settings.DefaultStore.ApplicationName = "Samples.AspNetCore";
+            settings.UseExceptionalPageOnThrow = HostingEnvironment.IsDevelopment();
+        });
+    }
 
-        public IConfiguration Configuration { get; }
-        public IWebHostEnvironment HostingEnvironment { get; }
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app)
+    {
+        new Exception("Startup test exception - see how I'm captured! This happens due to a pre-.Configure() IStartupFilter").LogNoContext();
+        // Boilerplate we're no longer using with Exceptional
+        //if (env.IsDevelopment())
+        //{
+        //    app.UseDeveloperExceptionPage();
+        //    app.UseBrowserLink();
+        //}
+        //else
+        //{
+        //    app.UseExceptionHandler("/Home/Error");
+        //}
+        app.UseExceptional();
+        app.UseStaticFiles();
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-            // Make IOptions<ExceptionalSettings> available for injection everywhere
-            services.AddExceptional(Configuration.GetSection("Exceptional"), settings =>
-            {
-                //settings.DefaultStore.ApplicationName = "Samples.AspNetCore";
-                settings.UseExceptionalPageOnThrow = HostingEnvironment.IsDevelopment();
-            });
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
-        {
-            new Exception("Startup test exception - see how I'm captured! This happens due to a pre-.Configure() IStartupFilter").LogNoContext();
-            // Boilerplate we're no longer using with Exceptional
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //    app.UseBrowserLink();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //}
-            app.UseExceptional();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"));
-        }
+        app.UseRouting();
+        app.UseEndpoints(endpoints => endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"));
     }
 }

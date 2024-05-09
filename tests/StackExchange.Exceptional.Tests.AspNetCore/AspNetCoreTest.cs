@@ -10,37 +10,34 @@ using StackExchange.Exceptional.Stores;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace StackExchange.Exceptional.Tests.AspNetCore
+namespace StackExchange.Exceptional.Tests.AspNetCore;
+
+public abstract class AspNetCoreTest(ITestOutputHelper output) : BaseTest(output)
 {
-    public abstract class AspNetCoreTest : BaseTest
-    {
-        protected ExceptionalSettings CurrentSettings { get; set; }
+    protected ExceptionalSettings CurrentSettings { get; set; }
 
-        protected AspNetCoreTest(ITestOutputHelper output) : base(output) { }
+    protected static string LogName([CallerMemberName]string name = null) => name;
 
-        protected string LogName([CallerMemberName]string name = null) => name;
+    protected Task<List<Error>> GetErrorsAsync() => CurrentSettings.DefaultStore.GetAllAsync();
 
-        protected Task<List<Error>> GetErrorsAsync() => CurrentSettings.DefaultStore.GetAllAsync();
+    protected TestServer GetServer(RequestDelegate requestDelegate, [CallerMemberName]string name = null) =>
+        new(BasicBuilder(requestDelegate, name));
 
-        protected TestServer GetServer(RequestDelegate requestDelegate, [CallerMemberName]string name = null) =>
-            new(BasicBuilder(requestDelegate, name));
+    protected IWebHostBuilder BasicBuilder(RequestDelegate requestDelegate, [CallerMemberName]string name = null) =>
+        new WebHostBuilder()
+           .ConfigureServices(services => services.AddExceptional(s =>
+           {
+               s.DefaultStore = new MemoryErrorStore();
+               CurrentSettings = s;
+           }))
+           .Configure(app =>
+           {
+               app.UseExceptional();
+               app.Run(requestDelegate);
+           });
+}
 
-        protected IWebHostBuilder BasicBuilder(RequestDelegate requestDelegate, [CallerMemberName]string name = null) =>
-            new WebHostBuilder()
-               .ConfigureServices(services => services.AddExceptional(s =>
-               {
-                   s.DefaultStore = new MemoryErrorStore();
-                   CurrentSettings = s;
-               }))
-               .Configure(app =>
-               {
-                   app.UseExceptional();
-                   app.Run(requestDelegate);
-               });
-    }
-
-    [CollectionDefinition(BaseTest.NonParallel, DisableParallelization = true)]
-    public class NonParallelDefinition
-    {
-    }
+[CollectionDefinition(BaseTest.NonParallel, DisableParallelization = true)]
+public class NonParallelDefinition
+{
 }

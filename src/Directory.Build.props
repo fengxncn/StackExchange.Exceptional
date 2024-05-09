@@ -22,4 +22,9 @@
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37" PrivateAssets="all" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>
+
+<Target Name="CopyPackage" AfterTargets="Pack">
+   <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="\\192.168.0.116\共享\StackExchange\" />
+</Target>
+
 </Project>
