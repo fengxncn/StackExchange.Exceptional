@@ -1,57 +1,54 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Security.Cryptography;
+using System.Text;
 
-namespace StackExchange.Exceptional.Internal
+namespace StackExchange.Exceptional.Internal;
+
+/// <summary>
+/// Internal Exceptional resources, not meant for consumption.
+/// This can and probably will break without warning. Don't use the .Internal namespace directly.
+/// </summary>
+public static class Resources
 {
     /// <summary>
-    /// Internal Exceptional resources, not meant for consumption.
-    /// This can and probably will break without warning. Don't use the .Internal namespace directly.
+    /// The JavaScript bundle.
     /// </summary>
-    public static class Resources
+    public static ResourceCache BundleJs = new("Bundle.min.js", "text/javascript");
+    /// <summary>
+    /// The CSS bundle.
+    /// </summary>
+    public static ResourceCache BundleCss = new("Bundle.min.css", "text/css");
+
+    /// <summary>
+    /// Cache data for a specific resource.
+    /// </summary>
+    public class ResourceCache
     {
         /// <summary>
-        /// The JavaScript bundle.
+        /// The SHA 384 hash for this resource.
         /// </summary>
-        public static ResourceCache BundleJs = new("Bundle.min.js", "text/javascript");
+        public string Sha512 { get; }
         /// <summary>
-        /// The CSS bundle.
+        /// The full content string for this resource.
         /// </summary>
-        public static ResourceCache BundleCss = new("Bundle.min.css", "text/css");
+        public string Content { get; }
+        /// <summary>
+        /// The MIME type for this resource.
+        /// </summary>
+        public string MimeType { get; }
 
-        /// <summary>
-        /// Cache data for a specific resource.
-        /// </summary>
-        public class ResourceCache
+        internal ResourceCache(string filename, string mimeType)
         {
-            /// <summary>
-            /// The SHA 384 hash for this resource.
-            /// </summary>
-            public string Sha512 { get; }
-            /// <summary>
-            /// The full content string for this resource.
-            /// </summary>
-            public string Content { get; }
-            /// <summary>
-            /// The MIME type for this resource.
-            /// </summary>
-            public string MimeType { get; }
+            MimeType = mimeType;
 
-            internal ResourceCache(string filename, string mimeType)
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("StackExchange.Exceptional.Resources." + filename))
+            using (var reader = new StreamReader(stream))
             {
-                MimeType = mimeType;
-
-                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("StackExchange.Exceptional.Resources." + filename))
-                using (var reader = new StreamReader(stream))
-                {
-                    Content = reader.ReadToEnd();
-                }
-
-                using var hash = SHA512.Create();
-                Sha512 = Convert.ToBase64String(hash.ComputeHash(Encoding.UTF8.GetBytes(Content)));
+                Content = reader.ReadToEnd();
             }
+
+            using var hash = SHA512.Create();
+            Sha512 = Convert.ToBase64String(hash.ComputeHash(Encoding.UTF8.GetBytes(Content)));
         }
     }
 }

@@ -376,7 +376,7 @@ public class Error
     /// <summary>
     /// The URL *path* of the request causing this error, e.g. /MyContoller/MyAction
     /// </summary>
-    [JsonProperty(nameof(Url))] // Legacy compatibility
+    [JsonProperty("Url")] // Legacy compatibility
     public string UrlPath { get; set; }
 
     /// <summary>

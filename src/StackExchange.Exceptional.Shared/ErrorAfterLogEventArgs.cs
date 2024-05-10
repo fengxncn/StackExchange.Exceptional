@@ -1,21 +1,16 @@
-﻿using System;
+﻿namespace StackExchange.Exceptional;
 
-namespace StackExchange.Exceptional
+/// <summary>
+/// Arguments for the event handler called after an exception is logged.
+/// </summary>
+/// <remarks>
+/// Creates an ErrorAfterLogEventArgs object to be passed to event handlers.
+/// </remarks>
+/// <param name="e">The error to create <see cref="ErrorAfterLogEventArgs"/> for.</param>
+public class ErrorAfterLogEventArgs(Error e) : EventArgs
 {
     /// <summary>
-    /// Arguments for the event handler called after an exception is logged.
+    /// The Error object in question.
     /// </summary>
-    public class ErrorAfterLogEventArgs : EventArgs
-    {
-        /// <summary>
-        /// The Error object in question.
-        /// </summary>
-        public Error Error { get; }
-
-        /// <summary>
-        /// Creates an ErrorAfterLogEventArgs object to be passed to event handlers.
-        /// </summary>
-        /// <param name="e">The error to create <see cref="ErrorAfterLogEventArgs"/> for.</param>
-        public ErrorAfterLogEventArgs(Error e) => Error = e;
-    }
+    public Error Error { get; } = e;
 }

@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <xUnitVersion>2.4.1</xUnitVersion>
   </PropertyGroup>

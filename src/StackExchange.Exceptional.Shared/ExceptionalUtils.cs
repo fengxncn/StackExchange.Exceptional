@@ -1,6 +1,5 @@
-﻿namespace StackExchange.Exceptional
+﻿namespace StackExchange.Exceptional;
+
+public static partial class ExceptionalUtils
 {
-    public static partial class ExceptionalUtils
-    {
-    }
 }

@@ -2,20 +2,15 @@
 using StackExchange.Exceptional.Stores;
 using Xunit.Abstractions;
 
-namespace StackExchange.Exceptional.Tests.Storage
+namespace StackExchange.Exceptional.Tests.Storage;
+
+public class MemoryErrorStoreTest(ITestOutputHelper output) : StoreBaseTest(output)
 {
-    public class MemoryErrorStoreTest : StoreBaseTest
-    {
-        protected override bool StoreHardDeletes => true;
+    protected override bool StoreHardDeletes => true;
 
-        public MemoryErrorStoreTest(ITestOutputHelper output) : base(output)
+    protected override ErrorStore GetStore([CallerMemberName]string appName = null) =>
+        new MemoryErrorStore(new ErrorStoreSettings
         {
-        }
-
-        protected override ErrorStore GetStore([CallerMemberName]string appName = null) =>
-            new MemoryErrorStore(new ErrorStoreSettings
-            {
-                ApplicationName = appName
-            });
-    }
+            ApplicationName = appName
+        });
 }
